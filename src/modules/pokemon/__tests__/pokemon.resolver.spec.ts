@@ -107,9 +107,12 @@ describe('PokemonResolver', () => {
       name: 'Pikachu',
       types: ['ELECTRIC'],
     };
-    const result = await resolver.createOnePokemon(input);
+    const result = await resolver.createOnePokemon(input, {
+      userId: 1,
+      email: 'ash.s@gmail.com',
+    });
     expect(result.name).toBe('Pikachu');
-    expect(service.create).toHaveBeenCalledWith(input);
+    expect(service.create).toHaveBeenCalledWith(input, 1);
   });
 
   it('should update a pokemon', async () => {
