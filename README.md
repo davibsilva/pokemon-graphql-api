@@ -120,16 +120,12 @@ npm install
 # or
 yarn
 
----
-
 🧬 Prisma Setup
 npx prisma generate
 npx prisma migrate dev --name init
 
 To reset the database:
 npx prisma migrate reset
-
----
 
 🧪 Running Tests
 npm run test
@@ -139,12 +135,13 @@ yarn test
 With coverage:
 yarn test --coverage
 
----
-
 🚀 Running the Application
 npm run start:dev
 # or
 yarn start:dev
+```
+
+---
 
 GraphQL Playground available at:
 http://localhost:4000/graphql
