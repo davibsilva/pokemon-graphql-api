@@ -152,8 +152,7 @@ http://localhost:4000/graphql
 
 📌 Query: Get all Pokémons
 graphql
-Copy
-Edit
+```json
 query {
   getAllPokemons(offset: 0, limit: 10) {
     results {
@@ -167,11 +166,11 @@ query {
     }
   }
 }
+```
 
 📌 Mutation: Import a Pokémon from PokeAPI
 graphql
-Copy
-Edit
+```json
 mutation {
   importPokemonById(id: 25) {
     id
@@ -183,6 +182,7 @@ mutation {
     }
   }
 }
+```
 
 ---
 
