@@ -71,45 +71,51 @@ Ensures data consistency and prevents invalid inserts.
 ```
 
 ### ✅ Unit Tests with Jest
-Fully covered PokemonResolver with mocked services.
 
-All guards and interceptors (rate-limiting, cache) are mocked for isolation.
+- Fully covered `PokemonResolver` with mocked services.
+- All guards and interceptors (rate-limiting, cache) are mocked for isolation.
 
-Reason:
+**Reason:**  
 Allows confident refactoring and verifies expected behavior independently of infrastructure.
 
-✅ Request Caching
-Caches the result of getAllPokemons for 120 seconds using a custom GqlCacheInterceptor.
+---
 
-Reason:
+### ✅ Request Caching
+
+- Caches the result of `getAllPokemons` for 120 seconds using a custom `GqlCacheInterceptor`.
+
+**Reason:**  
 Boosts performance for frequently accessed queries.
 
-✅ Rate Limiting
-Uses @nestjs/throttler to apply request limits.
+---
 
-Guards GraphQL operations through GqlThrottlerGuard.
+### ✅ Rate Limiting
 
-Reason:
+- Uses `@nestjs/throttler` to apply request limits.
+- Guards GraphQL operations through `GqlThrottlerGuard`.
+
+**Reason:**  
 Protects against abuse and ensures stability under high traffic.
 
-✅ Modular Project Architecture
+---
+
+### ✅ Modular Project Architecture
+
 Each domain has its own:
 
-Module
+- `Module`
+- `DTOs`
+- `GraphQL` models
+- `Services` and `Resolvers`
 
-DTOs
-
-GraphQL models
-
-Services and resolvers
-
-Reason:
+**Reason:**  
 Enhances scalability, testability, and maintainability.
 
-🛠 Installation
-bash
-Copy
-Edit
+---
+
+## 🛠 Installation
+
+```bash
 npm install
 # or
 yarn
@@ -149,7 +155,7 @@ GraphQL Playground available at:
 http://localhost:3000/graphql
 
 🔍 Useful Queries
-Query: Get all Pokémons
+📌 Query: Get all Pokémons
 graphql
 Copy
 Edit
@@ -166,7 +172,7 @@ query {
     }
   }
 }
-Mutation: Import a Pokémon from PokeAPI
+📌 Mutation: Import a Pokémon from PokeAPI
 graphql
 Copy
 Edit
@@ -188,3 +194,5 @@ with ❤️, technical precision, and high coding standards.
 yaml
 Copy
 Edit
+
+---
