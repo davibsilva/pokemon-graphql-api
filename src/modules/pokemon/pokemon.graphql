@@ -43,10 +43,8 @@ type PokemonList {
 }
 
 type Query {
-  # Retorna um Pokemon por ID
   getOnePokemon(id: Int!): Pokemon
 
-  # Retorna lista de Pokemons com filtros, paginação e ordenação
   getAllPokemons(
     offset: Int = 0,
     limit: Int = 10,
