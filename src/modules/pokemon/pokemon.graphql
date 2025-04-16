@@ -1,0 +1,58 @@
+type Type {
+  id: Int!
+  name: String!
+}
+
+type PokemonType {
+  type: Type!
+}
+
+type Pokemon {
+  id: Int!
+  name: String!
+  types: [PokemonType!]!
+  created_at: String!
+}
+
+input CreatePokemonInput {
+  name: String!
+  types: [String!]!
+}
+
+input UpdatePokemonInput {
+  name: String
+  types: [String!]
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+type PokemonList {
+  results: [Pokemon!]!
+}
+
+type Query {
+  # Retorna um Pokemon por ID
+  getOnePokemon(id: Int!): Pokemon
+
+  # Retorna lista de Pokemons com filtros, paginação e ordenação
+  getAllPokemons(
+    offset: Int = 0,
+    limit: Int = 10,
+    type: String,
+    name: String,
+    sortByCreatedAt: SortOrder = DESC
+  ): PokemonList!
+}
+
+type Mutation {
+  createOnePokemon(data: CreatePokemonInput!): Pokemon!
+  updateOnePokemon(id: Int!, data: UpdatePokemonInput!): Pokemon!
+  deleteOnePokemon(id: Int!): Boolean!
+
+  importPokemonById(id: Int!): Pokemon!
+
+  login(username: String!, password: String!): String!
+}
