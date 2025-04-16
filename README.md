@@ -119,42 +119,40 @@ Enhances scalability, testability, and maintainability.
 npm install
 # or
 yarn
+
+---
+
 🧬 Prisma Setup
-bash
-Copy
-Edit
 npx prisma generate
 npx prisma migrate dev --name init
-To reset the database:
 
-bash
-Copy
-Edit
+To reset the database:
 npx prisma migrate reset
+
+---
+
 🧪 Running Tests
-bash
-Copy
-Edit
 npm run test
 # or
 yarn test
-With coverage:
 
-bash
-Copy
-Edit
+With coverage:
 yarn test --coverage
+
+---
+
 🚀 Running the Application
-bash
-Copy
-Edit
 npm run start:dev
 # or
 yarn start:dev
+
 GraphQL Playground available at:
-http://localhost:3000/graphql
+http://localhost:4000/graphql
+
+---
 
 🔍 Useful Queries
+
 📌 Query: Get all Pokémons
 graphql
 Copy
@@ -172,6 +170,7 @@ query {
     }
   }
 }
+
 📌 Mutation: Import a Pokémon from PokeAPI
 graphql
 Copy
@@ -187,12 +186,9 @@ mutation {
     }
   }
 }
-👨‍💻 Author
-Project proudly developed and enhanced by Davi Silva,
-with ❤️, technical precision, and high coding standards.
-
-yaml
-Copy
-Edit
 
 ---
+
+👨‍💻 Author
+Project proudly developed and enhanced by Davi Silva,
+with ❤️, technical precision, and high coding standards
