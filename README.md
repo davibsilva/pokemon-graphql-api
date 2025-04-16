@@ -68,8 +68,9 @@ Ensures data consistency and prevents invalid inserts.
     "status": 400
   }
 }
+```
 
-✅ Unit Tests with Jest
+### ✅ Unit Tests with Jest
 Fully covered PokemonResolver with mocked services.
 
 All guards and interceptors (rate-limiting, cache) are mocked for isolation.
