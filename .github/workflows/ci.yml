@@ -43,8 +43,5 @@ jobs:
       - name: 🧬 Generate Prisma Client
         run: npx prisma generate
 
-      - name: 🚧 Run Prisma Migrations
-        run: npx prisma migrate dev --name init --skip-seed --force
-
       - name: ✅ Run Tests
         run: yarn test
