@@ -12,6 +12,15 @@ type Pokemon {
   name: String!
   types: [PokemonType!]!
   created_at: String!
+  createdBy: User
+  createdById: Int
+}
+
+type User {
+  id: Int!
+  email: String!
+  created_at: String!
+  pokemons: [Pokemon]
 }
 
 input CreatePokemonInput {
@@ -53,6 +62,4 @@ type Mutation {
   deleteOnePokemon(id: Int!): Boolean!
 
   importPokemonById(id: Int!): Pokemon!
-
-  login(username: String!, password: String!): String!
 }

@@ -1,0 +1,21 @@
+type Mutation {
+  signup(data: SignupInput!): AuthTokensResponse!
+  login(data: LoginInput!): AuthTokensResponse!
+  refreshToken(token: String!): String!
+  logout: Boolean!
+}
+
+input SignupInput {
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type AuthTokensResponse {
+  accessToken: String!
+  refreshToken: String!
+}

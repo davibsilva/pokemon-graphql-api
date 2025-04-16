@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Pokemon, Prisma } from '@prisma/client';
+import { Pokemon } from '@prisma/client';
 import { UpdatePokemonInput } from './dto/update-pokemon.input';
 import axios from 'axios';
 
@@ -28,11 +28,21 @@ export class PokemonService {
     sortOrder: 'ASC' | 'DESC' = 'DESC',
   ): Promise<Pokemon[]> {
     const filters: any = {};
+
     if (type) {
-      filters.type = type.toUpperCase();
+      filters.types = {
+        some: {
+          type: {
+            name: type.toUpperCase(),
+          },
+        },
+      };
     }
+
     if (name) {
-      filters.name = { contains: name };
+      filters.name = {
+        contains: name,
+      };
     }
 
     return this.prisma.pokemon.findMany({
@@ -40,8 +50,7 @@ export class PokemonService {
       take: limit,
       where: filters,
       orderBy: {
-        created_at:
-          sortOrder === 'ASC' ? Prisma.SortOrder.asc : Prisma.SortOrder.desc,
+        created_at: sortOrder === 'ASC' ? 'asc' : 'desc',
       },
       include: {
         types: {
@@ -49,11 +58,15 @@ export class PokemonService {
             type: true,
           },
         },
+        createdBy: {},
       },
     });
   }
 
-  async create(data: { name: string; types: string[] }): Promise<Pokemon> {
+  async create(
+    data: { name: string; types: string[] },
+    userId: number,
+  ): Promise<Pokemon> {
     try {
       const typeRecords = await Promise.all(
         data.types.map((name) =>
@@ -68,6 +81,7 @@ export class PokemonService {
       const newPokemon = await this.prisma.pokemon.create({
         data: {
           name: data.name,
+          createdBy: { connect: { id: userId } },
           types: {
             create: typeRecords.map((type) => ({
               type: { connect: { id: type.id } },
@@ -80,6 +94,7 @@ export class PokemonService {
               type: true,
             },
           },
+          createdBy: {},
         },
       });
 

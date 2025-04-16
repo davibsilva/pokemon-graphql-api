@@ -7,6 +7,8 @@ import { GqlCacheInterceptor } from 'src/interceptors/gql-cache.interceptor';
 import { CreatePokemonInput } from './dto/create-pokemon.input';
 import { UpdatePokemonInput } from './dto/update-pokemon.input';
 import { GqlThrottlerGuard } from 'src/guards/gql-throttler.guard';
+import { GqlAuthGuard } from 'src/guards/gql-auth.guard';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
 
 @Resolver('Pokemon')
 export class PokemonResolver {
@@ -39,13 +41,16 @@ export class PokemonResolver {
   }
 
   @Mutation('createOnePokemon')
+  @UseGuards(GqlAuthGuard)
   async createOnePokemon(
     @Args('data') data: CreatePokemonInput,
+    @CurrentUser() user: { userId: number; email: string },
   ): Promise<Pokemon> {
-    return this.pokemonService.create(data);
+    return this.pokemonService.create(data, user.userId);
   }
 
   @Mutation('updateOnePokemon')
+  @UseGuards(GqlAuthGuard)
   async updateOnePokemon(
     @Args('id') id: number,
     @Args('data') data: UpdatePokemonInput,
@@ -54,11 +59,13 @@ export class PokemonResolver {
   }
 
   @Mutation('deleteOnePokemon')
+  @UseGuards(GqlAuthGuard)
   async deleteOnePokemon(@Args('id') id: number): Promise<boolean> {
     return this.pokemonService.delete(id);
   }
 
   @Mutation('importPokemonById')
+  @UseGuards(GqlAuthGuard)
   async importPokemonById(@Args('id', { type: () => Int }) id: number) {
     return this.pokemonService.importFromPokeApi(id);
   }

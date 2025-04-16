@@ -3,16 +3,17 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:../database/database_prisma.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Pokemon {
   id     Int           @id @default(autoincrement())
   name   String        @unique
   types  PokemonType[]
-
   created_at DateTime @default(now())
+  createdBy  User?            @relation(fields: [createdById], references: [id])
+  createdById Int?
   @@map("pokemons")
 }
 
@@ -30,4 +31,13 @@ model PokemonType {
   type    Type    @relation(fields: [typeId], references: [id])
 
   @@id([pokemonId, typeId])
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  password     String
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  pokemons     Pokemon[]
 }
