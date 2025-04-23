@@ -1,17 +1,3 @@
-# Candidate Interview Project
-
-## Project Overview
-
-Welcome to the interview project! This project is designed to assess your skills in building a backend API using Node.js and GraphQL.
-
-### Goals
-
-- Understand your proficiency with Node.js and GraphQL.
-- Evaluate your ability to design and implement a scalable API.
-- Analyze your coding practices and problem-solving approach.
-
----
-
 ## 🛠 Installation
 
 ```bash
